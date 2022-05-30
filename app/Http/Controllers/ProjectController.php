@@ -14,6 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        //Selection for all Project table data + orderBy
         $projects = Project::orderBy('id')->get();
         return view('project.index', compact('projects'));
     }
@@ -42,14 +43,14 @@ class ProjectController extends Controller
             'students_per_group' => 'required',
         ]);
 
+        //Creating new project with filled information
         $project = new Project;
         $project->title = $request->title;
         $project->group_qty = $request->group_qty;
         $project->students_per_group = $request->students_per_group;
         $project->save();
 
-        // Project::create($request->all());
-        return redirect()->route('project.index')->with('success', 'Product created successfully');
+        return redirect()->route('project.index')->with('success', 'Project created successfully');
     }
 
     /**
