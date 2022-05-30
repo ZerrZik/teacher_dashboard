@@ -20,7 +20,8 @@
             </div>
         </div>
     </div>
-
+    <br>
+    <h3>Students</h3>
     {{-- Table to add or delete students --}}
     <table class="table">
         <thead class="table-dark">
@@ -31,7 +32,7 @@
               </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($students as $student)
+            @foreach ($students as $student)
             <tr>
                 <td>{{ $student->full_name }}</td>
                 <td>
@@ -40,15 +41,21 @@
                         $group = $student->groups()->where('student_id', $student->id)->where('project_id', $project->id)->first();
                     @endphp
                     @if ($group)
-                        #{{ $group->group_num }}
+                        Group #{{ $group->number }}
                     @else
                         -
                     @endif
                 </td>
                 <td>
+                    <form action="{{ route('student.destroy', $student->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="project_id" value="{{ $project->id }}">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
                 </td>
             </tr>
-        @endforeach --}}
+        @endforeach
         </tbody>
       </table>
       <a class="btn btn-primary" href="{{ route('student.create', $project) }}">Add Student</a>

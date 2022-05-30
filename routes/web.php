@@ -25,6 +25,7 @@ Route::controller(ProjectController::class)->group(function(){
 Route::controller(StudentController::class)->group(function(){
     Route::get('/student/create/{project}', 'create')->name('student.create');
     Route::post('/student/store/{project}', 'store')->name('student.store');
+    Route::delete('/student/{student}/delete', 'destroy')->name('student.destroy');
 });
 
 
