@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class StudentController extends Controller
 {
@@ -22,9 +23,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('student.create');
+        return view('student.create', compact('project'));
     }
 
     /**

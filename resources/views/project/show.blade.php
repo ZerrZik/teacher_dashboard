@@ -48,6 +48,6 @@
               </tr>
         </tbody>
       </table>
-      <a class="btn btn-primary" href="{{ route('student.create', $project) }}">Add Student</a>
+      <a class="btn btn-primary" href="{{ route('student.create') }}">Add Student</a>
 </div>
 @endsection

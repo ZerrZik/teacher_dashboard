@@ -12,7 +12,7 @@
     <br>
     @foreach ($projects as $project)
     <div class="card d-inline-block" style="width: 20rem;">
-        <a style="text-decoration:none; color:black" href="{{ route('project.show', $project->id) }}">
+        <a style="text-decoration:none; color:black" href="{{ route('project.show', compact('project')) }}">
             <div class="card-body">
                 <h3 class="card-title">Project title: <b> {{ $project->title }} </b></h3>
                 <h4 class="card-title">Number of groups: {{ $project->group_qty }}</h4>

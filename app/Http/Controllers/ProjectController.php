@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -15,7 +16,7 @@ class ProjectController extends Controller
     public function index()
     {
         //Selection for all Project table data + orderBy
-        $projects = Project::orderBy('id')->get();
+        $projects = Project::all();
         return view('project.index', compact('projects'));
     }
 
@@ -44,11 +45,15 @@ class ProjectController extends Controller
         ]);
 
         //Creating new project with filled information
-        $project = new Project;
-        $project->title = $request->title;
-        $project->group_qty = $request->group_qty;
-        $project->students_per_group = $request->students_per_group;
-        $project->save();
+        $project = Project::create($request->all());
+
+        //Creating group quantity on user input
+        for ($i = 0; $i < $request->group_qty; $i++) {
+            $group = new Group;
+            $group->project_id = $project->id;
+            $group->group_qty = $i;
+            $group->save();
+        }
 
         return redirect()->route('project.index')->with('success', 'Project created successfully');
     }
