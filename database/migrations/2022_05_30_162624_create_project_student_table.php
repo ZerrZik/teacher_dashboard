@@ -15,6 +15,8 @@ class CreateProjectStudentTable extends Migration
     {
         Schema::create('project_student', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id');
+            $table->foreignId('student_id');
             $table->timestamps();
         });
     }
