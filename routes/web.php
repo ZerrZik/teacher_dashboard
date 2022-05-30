@@ -19,11 +19,12 @@ Route::controller(ProjectController::class)->group(function(){
     Route::get('/project', 'index')->name('project.index');
     Route::get('/project/create', 'create')->name('project.create');
     Route::post('/project/store', 'store')->name('project.store');
-    Route::get('/project/show', 'show')->name('project.show');
+    Route::get('/project/{project}/show', 'show')->name('project.show');
 });
 
 Route::controller(StudentController::class)->group(function(){
-    Route::get('/student/create', 'create')->name('student.create');
+    Route::get('/student/create/{project}', 'create')->name('student.create');
+    Route::post('/student/store/{project}', 'store')->name('student.store');
 });
 
 

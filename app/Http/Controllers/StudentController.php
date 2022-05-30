@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Student;
+use App\Models\Group;
+use Illuminate\Http\Request;
+
 
 class StudentController extends Controller
 {
@@ -34,18 +36,21 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, project $project)
     {
         $request->validate([
-            'Full_name' => 'required|max:100',
+            'full_name' => 'required|max:100',
         ]);
 
-        //Addint new student to table
-        $student = new Student;
-        $student->full_name = $request->full_name;
-        $student->save();
+        //Check if such student already exists in database
+        if(Student::where('full_name', '=', $request->full_name)->exists()){
+            return redirect()->route('project.show', compact('project'));
+        }else{
+             // Create new student
+        Student::create($request->all());
 
-        return redirect()->route('project.show')->with('success', 'Project created successfully');
+        return redirect()->route('project.show', compact('project'))->with('success', 'Student was added successfully');
+        }
     }
 
     /**

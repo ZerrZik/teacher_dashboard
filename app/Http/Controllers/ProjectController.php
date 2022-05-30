@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Group;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -48,10 +49,10 @@ class ProjectController extends Controller
         $project = Project::create($request->all());
 
         //Creating group quantity on user input
-        for ($i = 0; $i < $request->group_qty; $i++) {
+        for ($i = 1; $i <= $request->group_qty; $i++) {
             $group = new Group;
             $group->project_id = $project->id;
-            $group->group_qty = $i;
+            $group->number = $i;
             $group->save();
         }
 
@@ -66,6 +67,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $students = Student::all();
+        $groups = Group::all();
+
         return view('project.show', compact('project'));
     }
 

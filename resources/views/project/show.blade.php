@@ -31,23 +31,26 @@
               </tr>
         </thead>
         <tbody>
+            {{-- @foreach ($students as $student)
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-              </tr>
+                <td>{{ $student->full_name }}</td>
+                <td>
+                    
+                    @php
+                        $group = $student->groups()->where('student_id', $student->id)->where('project_id', $project->id)->first();
+                    @endphp
+                    @if ($group)
+                        #{{ $group->group_num }}
+                    @else
+                        -
+                    @endif
+                </td>
+                <td>
+                </td>
+            </tr>
+        @endforeach --}}
         </tbody>
       </table>
-      <a class="btn btn-primary" href="{{ route('student.create') }}">Add Student</a>
+      <a class="btn btn-primary" href="{{ route('student.create', $project) }}">Add Student</a>
 </div>
 @endsection
