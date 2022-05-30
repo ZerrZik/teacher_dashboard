@@ -70,7 +70,7 @@ class ProjectController extends Controller
         $students = Student::all();
         $groups = Group::all();
 
-        return view('project.show', compact('project'));
+        return view('project.show', compact('project', 'students', 'groups'));
     }
 
     /**
