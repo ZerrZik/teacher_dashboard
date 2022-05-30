@@ -35,7 +35,16 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'Full_name' => 'required|max:100',
+        ]);
+
+        //Addint new student to table
+        $student = new Student;
+        $student->full_name = $request->full_name;
+        $student->save();
+
+        return redirect()->route('project.show')->with('success', 'Project created successfully');
     }
 
     /**
