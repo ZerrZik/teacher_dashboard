@@ -36,10 +36,8 @@
             <tr>
                 <td>{{ $student->full_name }}</td>
                 <td>
-
                     @php
-                    $group = $student->groups()->where('student_id', $student->id)->where('project_id',
-                    $project->id)->first();
+                    $group = $student->groups()->where('student_id', $student->id)->where('project_id',$project->id)->first();
                     @endphp
                     @if ($group)
                     Group #{{ $group->number }}
@@ -52,7 +50,6 @@
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="project_id" value="{{ $project->id }}">
-
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </form>
                 </td>
