@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,11 @@ Route::controller(StudentController::class)->group(function(){
     Route::get('/student/create/{project}', 'create')->name('student.create');
     Route::post('/student/store/{project}', 'store')->name('student.store');
     Route::delete('/student/{student}/delete', 'destroy')->name('student.destroy');
+});
+
+Route::controller(GroupController::class)->group(function(){
+    Route::post('/group/store', 'store')->name('group.store');
+
 });
 
 

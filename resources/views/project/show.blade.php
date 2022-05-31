@@ -29,21 +29,22 @@
                 <th scope="col">Student</th>
                 <th scope="col">Group</th>
                 <th scope="col">Actions</th>
-              </tr>
+            </tr>
         </thead>
         <tbody>
             @foreach ($students as $student)
             <tr>
                 <td>{{ $student->full_name }}</td>
                 <td>
-                    
+
                     @php
-                        $group = $student->groups()->where('student_id', $student->id)->where('project_id', $project->id)->first();
+                    $group = $student->groups()->where('student_id', $student->id)->where('project_id',
+                    $project->id)->first();
                     @endphp
                     @if ($group)
-                        Group #{{ $group->number }}
+                    Group #{{ $group->number }}
                     @else
-                        -
+                    -
                     @endif
                 </td>
                 <td>
@@ -51,13 +52,60 @@
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="project_id" value="{{ $project->id }}">
+
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
-      </table>
-      <a class="btn btn-primary" href="{{ route('student.create', $project) }}">Add Student</a>
+    </table>
+    <a class="btn btn-primary" href="{{ route('student.create', $project) }}">Add Student</a>
+    <br>
+    <br>
+
+    <h3>Groups</h3>
+
+    <div class="col-6">
+        <div class="row my-4">
+            <h1>Groups</h1>
+            {{-- Creating group tables with option fields --}}
+            @for ($i = 1; $i <= $project->group_qty; $i++)
+                <div class="col-5 me-3">
+                    <table class="table table-bordered text-center">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th>Group #{{$i}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for ($j = 0; $j < $project->students_per_group; $j++)
+                                <tr>
+                                    <td class="p-0">
+                                        <form action="{{route('group.store')}}" onchange="submit();" method="POST">
+                                            @csrf
+                                            <select name="full_name" class="form-select">
+                                                <option value="">Assign student</option>
+                                                @foreach ($students as $student)
+                                                        <option value="{{$student->full_name}}">{{$student->full_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="hidden" name="project_id" value="{{$project->id}}">
+                                            <input type="hidden" name="number" value="{{$i}}">
+                                        </form>
+                                    </td>
+                                </tr>  
+                            @endfor
+                        </tbody>
+                    </table>
+                </div>
+            @endfor
+        </div>
+
+
+
+    
+
+
 </div>
 @endsection
