@@ -23,6 +23,7 @@ Route::controller(ProjectController::class)->group(function(){
     Route::get('/project/{project}/show', 'show')->name('project.show');
     Route::get('/project/{project}/edit', 'edit')->name('project.edit');
     Route::put('/project/{id}/update', 'update')->name('project.update');
+    Route::delete('/project/{project}/delete', 'destroy')->name('project.destroy');
 });
 
 Route::controller(StudentController::class)->group(function(){

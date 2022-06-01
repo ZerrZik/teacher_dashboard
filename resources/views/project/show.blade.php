@@ -20,7 +20,9 @@
             </div>
         </div>
     </div>
+
     <br>
+
     <h3>Students</h3>
     {{-- Message after student is added successfully --}}
     @if ($message = Session::get('success'))
@@ -31,9 +33,9 @@
 
     {{-- Message after trying to insert existing students full_name--}}
     @if ($message = Session::get('error'))
-    <div class="alert alert-danger">
-        <p>{{ $message }}</p>
-    </div>
+        <div class="alert alert-danger">
+            <p>{{ $message }}</p>
+        </div>
     @endif
 
     {{-- Table to add or delete students --}}
@@ -47,28 +49,28 @@
         </thead>
         <tbody>
             @foreach ($students as $student)
-            <tr>
-                <td>{{ $student->full_name }}</td>
-                <td>
-                    @php
-                    $group = $student->groups()->where('student_id',$student->id)->where('project_id',$project->id)->first();
-                    @endphp
+                <tr>
+                    <td>{{ $student->full_name }}</td>
+                    <td>
+                        @php
+                        $group = $student->groups()->where('student_id',$student->id)->where('project_id',$project->id)->first();
+                        @endphp
 
-                    @if ($group)
-                    Group #{{ $group->number }}
-                    @else
-                    -
-                    @endif
-                </td>
-                <td>
-                    <form action="{{ route('student.destroy', $student->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="project_id" value="{{ $project->id }}">
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </form>
-                </td>
-            </tr>
+                        @if ($group)
+                        Group #{{ $group->number }}
+                        @else
+                        -
+                        @endif
+                    </td>
+                    <td>
+                        <form action="{{ route('student.destroy', $student->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="project_id" value="{{ $project->id }}">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
