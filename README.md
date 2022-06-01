@@ -28,6 +28,7 @@ Install all the dependencies
 * composer install
 
 Copy the env.example database connection file and make required changes in .env file
+<br>
 Tip* Make sure your database is named teacher_dashboard
 * cp .env.example .env
 
