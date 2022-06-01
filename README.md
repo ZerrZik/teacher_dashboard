@@ -19,22 +19,22 @@ Teacher can delete a student, in such case student is removed from group and pro
 Project was made on Laravel 8, so below you will find instalation instruction.
 
 Clone the repository:
-*https://github.com/Ztva/teacher_dashboard.git
+* https://github.com/Ztva/teacher_dashboard.git
 
 Switch to repository folder:
-*cd teacher_dashboard
+* cd teacher_dashboard
 
 Install all the dependencies
-*composer install
+* composer install
 
 Copy the env.example database connection file and make required changes in .env file
 Tip* Make sure your database is named teacher_dashboard
-*cp .env.example .env
+* cp .env.example .env
 
 Run database migrations
-*php artisan migrate
+* php artisan migrate
 
 Start local development server
-*php artisan serve
+* php artisan serve
 
 You can now access your local server via code editors supplied link, or at: http://localhost:8000
