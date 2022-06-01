@@ -25,7 +25,7 @@
                 <h3 class="card-title">Project title: <b> {{ $project->title }} </b></h3>
                 <h4 class="card-title">Number of groups: {{ $project->group_qty }}</h4>
                 <h6 class="card-title">Students per group: {{ $project->students_per_group }}</h6>
-                <a href="#" class="btn btn-warning">Edit</a>
+                <a href="{{ route('project.edit', $project) }}" class="btn btn-warning">Edit</a>
                 <a href="#" class="btn btn-danger">Delete</a>
             </div>
         </a>

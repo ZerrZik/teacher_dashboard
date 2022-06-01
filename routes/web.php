@@ -21,6 +21,8 @@ Route::controller(ProjectController::class)->group(function(){
     Route::get('/project/create', 'create')->name('project.create');
     Route::post('/project/store', 'store')->name('project.store');
     Route::get('/project/{project}/show', 'show')->name('project.show');
+    Route::get('/project/{project}/edit', 'edit')->name('project.edit');
+    Route::put('/project/{id}/update', 'update')->name('project.update');
 });
 
 Route::controller(StudentController::class)->group(function(){

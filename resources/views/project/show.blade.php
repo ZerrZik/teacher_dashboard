@@ -81,7 +81,7 @@
         <div class="row my-4">
             <h3>Groups</h3>
 
-            {{-- Message after trying to insert existing students full_name--}}
+            {{-- Message after trying to insert existing student full_name--}}
             @if ($message = Session::get('errorStudent'))
                 <div class="alert alert-danger">
                     <p>{{ $message }}</p>
@@ -90,7 +90,7 @@
 
             {{-- Creating group tables with option fields --}}
             @for ($i = 1; $i <= $project->group_qty; $i++)
-                <div class="col-5 me-3">
+                <div class="col-5">
                     <table class="table table-bordered text-center">
                         <thead class="table-secondary">
                             <tr>
@@ -99,22 +99,22 @@
                         </thead>
                         <tbody>
                             @for ($j=0; $j<$project->students_per_group; $j++)
-                                    <tr>
-                                        <td class="p-0">
-                                            <form action="{{ route('group.store') }}" onchange="submit();" method="POST">
-                                                @csrf
-                                                <select name="full_name" class="form-select">
+                                <tr>
+                                    <td class="p-0">
+                                        <form action="{{ route('group.store') }}" onchange="submit();" method="POST">
+                                            @csrf
+                                            <select name="full_name" class="form-select" id="full_name">
                                                     <option value="">Assign student</option>
                                                     @foreach ($students as $student)
                                                     <option value="{{ $student->full_name }}">{{ $student->full_name }}</option>
                                                     @endforeach
-                                                </select>
-                                                <input type="hidden" name="project_id" value="{{ $project->id }}">
-                                                <input type="hidden" name="number" value="{{ $i }}">
-                                            </form>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                    
+                                            </select>
+                                            <input type="hidden" name="project_id" value="{{ $project->id }}">
+                                            <input type="hidden" name="number" value="{{ $i }}">
+                                        </form>
+                                    </td>
+                                </tr>
                             @endfor
                         </tbody>
                     </table>
