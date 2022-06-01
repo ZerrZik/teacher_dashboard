@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+
 Route::controller(ProjectController::class)->group(function(){
-    Route::get('/project', 'index')->name('project.index');
     Route::get('/project/create', 'create')->name('project.create');
     Route::post('/project/store', 'store')->name('project.store');
     Route::get('/project/{project}/show', 'show')->name('project.show');
@@ -34,7 +35,6 @@ Route::controller(StudentController::class)->group(function(){
 
 Route::controller(GroupController::class)->group(function(){
     Route::post('/group/store', 'store')->name('group.store');
-
 });
 
 

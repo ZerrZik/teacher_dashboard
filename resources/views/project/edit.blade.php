@@ -3,12 +3,15 @@
 @section ('content')
 
 <div class="container">
+
     <div class="text-center">
         <h1>Edit project</h1>
     </div>
+
     <div>
         <a href="{{ route('project.index') }}" class="btn btn-success">Back to projects</a>
     </div>
+
     <br>
 
     <div class="container col-md-5">
@@ -31,4 +34,4 @@
         </form>
     </div>
 
-    @endsection
+ @endsection

@@ -3,12 +3,15 @@
 @section ('content')
 
 <div class="container">
+
     <div class="text-center">
         <h1>Project: {{$project->title}} </h1>
     </div>
+
     <div>
         <a href="{{ route('project.index') }}" class="btn btn-success">Back to projects</a>
     </div>
+    
     <br>
 
     <div class="container mt-5">
