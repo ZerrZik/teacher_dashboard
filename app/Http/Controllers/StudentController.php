@@ -44,12 +44,12 @@ class StudentController extends Controller
 
         //Check if such student already exists in database
         if(Student::where('full_name', '=', $request->full_name)->exists()){
-            return redirect()->route('project.show', compact('project'));
+            return redirect()->route('project.show', compact('project'))->with('error', 'Such student already exists!');
         }else{
              // Create new student
         Student::create($request->all());
 
-        return redirect()->route('project.show', compact('project'))->with('success', 'Student was added successfully');
+        return redirect()->route('project.show', compact('project'))->with('success', 'Student has been added successfully!');
         }
     }
 

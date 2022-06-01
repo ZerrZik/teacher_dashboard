@@ -9,6 +9,14 @@
     <div>
         <a href="{{ route('project.create') }}" class="btn btn-primary">Create new project</a>
     </div>
+
+    {{-- Message after project is created --}}
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
     <br>
     @foreach ($projects as $project)
     <div class="card d-inline-block" style="width: 20rem;">

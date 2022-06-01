@@ -22,6 +22,20 @@
     </div>
     <br>
     <h3>Students</h3>
+    {{-- Message after student is added successfully --}}
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
+    {{-- Message after trying to insert existing students full_name--}}
+    @if ($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
+
     {{-- Table to add or delete students --}}
     <table class="table">
         <thead class="table-dark">
@@ -37,8 +51,9 @@
                 <td>{{ $student->full_name }}</td>
                 <td>
                     @php
-                    $group = $student->groups()->where('student_id', $student->id)->where('project_id',$project->id)->first();
+                    $group = $student->groups()->where('student_id',$student->id)->where('project_id',$project->id)->first();
                     @endphp
+
                     @if ($group)
                     Group #{{ $group->number }}
                     @else
@@ -57,15 +72,22 @@
             @endforeach
         </tbody>
     </table>
+
     <a class="btn btn-primary" href="{{ route('student.create', $project) }}">Add Student</a>
     <br>
     <br>
 
-    <h3>Groups</h3>
-
     <div class="col-6">
         <div class="row my-4">
-            <h1>Groups</h1>
+            <h3>Groups</h3>
+
+            {{-- Message after trying to insert existing students full_name--}}
+            @if ($message = Session::get('errorStudent'))
+                <div class="alert alert-danger">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
+
             {{-- Creating group tables with option fields --}}
             @for ($i = 1; $i <= $project->group_qty; $i++)
                 <div class="col-5 me-3">
@@ -76,33 +98,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($j = 0; $j < $project->students_per_group; $j++)
-                                <tr>
-                                    <td class="p-0">
-                                        <form action="{{route('group.store')}}" onchange="submit();" method="POST">
-                                            @csrf
-                                            <select name="full_name" class="form-select">
-                                                <option value="">Assign student</option>
-                                                @foreach ($students as $student)
-                                                        <option value="{{$student->full_name}}">{{$student->full_name}}</option>
-                                                @endforeach
-                                            </select>
-                                            <input type="hidden" name="project_id" value="{{$project->id}}">
-                                            <input type="hidden" name="number" value="{{$i}}">
-                                        </form>
-                                    </td>
-                                </tr>  
+                            @for ($j=0; $j<$project->students_per_group; $j++)
+                                    <tr>
+                                        <td class="p-0">
+                                            <form action="{{ route('group.store') }}" onchange="submit();" method="POST">
+                                                @csrf
+                                                <select name="full_name" class="form-select">
+                                                    <option value="">Assign student</option>
+                                                    @foreach ($students as $student)
+                                                    <option value="{{ $student->full_name }}">{{ $student->full_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <input type="hidden" name="project_id" value="{{ $project->id }}">
+                                                <input type="hidden" name="number" value="{{ $i }}">
+                                            </form>
+                                            </div>
+                                        </td>
+                                    </tr>
                             @endfor
                         </tbody>
                     </table>
                 </div>
             @endfor
         </div>
-
-
-
-    
-
-
+    </div>
 </div>
 @endsection

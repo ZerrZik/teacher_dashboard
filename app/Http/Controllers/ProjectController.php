@@ -16,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //Selection for all Project table data + orderBy
+        //Selection for all Project table data
         $projects = Project::all();
         return view('project.index', compact('projects'));
     }

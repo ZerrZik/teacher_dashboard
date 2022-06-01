@@ -45,11 +45,11 @@ class GroupController extends Controller
         $group = Group::where('project_id', $request->project_id)->where('number', $request->number)->first();
         $student = Student::where('full_name', $request->full_name)->first();
 
-        // check if student id assigned already:
+        // Check if student is assigned already
         $projectGroups = Group::where('project_id', $request->project_id)->get();
         foreach ($projectGroups as $projectGroup) {
             if ($projectGroup->students()->where('student_id', $student->id)->exists()){
-                return redirect()->back()->with('error', 'This student assigned to a group already!');
+                return redirect()->back()->with('errorStudent', 'This student assigned to a group already!');
             }
         }
 
